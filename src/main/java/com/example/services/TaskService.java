@@ -9,7 +9,7 @@ public interface TaskService {
      * 1から10までのタスクを設定し、タスクIDを返す
      * @return タスクID
      */
-    public int register();
+    public Task register();
 
     /**
      * 与えられたタスクIDを非同期に実行する

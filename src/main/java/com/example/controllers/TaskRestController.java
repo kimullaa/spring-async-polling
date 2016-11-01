@@ -2,7 +2,8 @@ package com.example.controllers;
 
 import com.example.Task;
 import com.example.services.TaskService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,11 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@Slf4j
 @RestController
+@AllArgsConstructor
 @RequestMapping("api/tasks")
 public class TaskRestController {
-    @Autowired
-    TaskService service;
+    final TaskService service;
 
     @GetMapping
     public List<Task> showAll(){
@@ -22,9 +24,10 @@ public class TaskRestController {
     }
 
     @PostMapping
-    public void execute() {
-        int id = service.register();
-        service.execute(id);
+    public Task execute() {
+        Task task = service.register();
+        service.execute(task.getId());
+        return task;
     }
 
 }
